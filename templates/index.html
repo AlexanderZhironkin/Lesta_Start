@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8" />
+    <title>Анализ текста</title>
+</head>
+<body>
+    <h1>Загрузка текстового файла для анализа</h1>
+    <form method="post" enctype="multipart/form-data">
+        <input type="file" name="text_file" accept=".txt" required />
+        <button type="submit">Загрузить и проанализировать</button>
+    </form>
+
+    {% if table_data %}
+        <h2>Таблица слов</h2>
+        <table border="1" cellpadding="5" cellspacing="0">
+            <thead>
+                <tr>
+                    <th>слово</th>
+                    <th>tf</th>
+                    <th>idf</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for word, tf, idf in table_data %}
+                <tr>
+                    <td>{{ word }}</td>
+                    <td>{{ tf }}</td>
+                    <td>{{ "%.4f"|format(idf) }}</td>
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    {% endif %}
+</body>
+</html>
